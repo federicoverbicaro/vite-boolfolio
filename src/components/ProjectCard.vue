@@ -23,7 +23,7 @@ export default {
         console.log(res.data.wallets.data)
 
         res.data.wallets.data.forEach(element => {
-        element.new_image = 'http://127.0.0.1:8000/storage/images/' + element.new_image;
+        element.new_image = 'http://127.0.0.1:8000/storage/' + element.new_image;
       });
 
 
@@ -46,7 +46,7 @@ export default {
   <h1>Benvenuti</h1>
 
   <div class="card d-flex mt-3" v-for="(element, index) in arrayWallet" :key="element.id">
-    <img class="card-img-top" :src="'http://127.0.0.1:8000/storage/images/' + element.new_image" alt="Title" />
+    <img class="card-img-top" :src="element.new_image" alt="Title" />
     <div class="card-body">
       <h4 class="card-title">{{ element.title }}</h4>
       <p class="card-text">Description: {{ element.description }}</p>

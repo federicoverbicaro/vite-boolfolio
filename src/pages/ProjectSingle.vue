@@ -5,29 +5,23 @@ export default {
     data() {
         return {
             project: [],
+            imageUrl: '',
         }
     },
     methods: {
-        getProject(walletApiPage) {
-            axios.get('http://127.0.0.1:8000/api/portfolio',
-                {
-                    params: {
-                        page: walletApiPage
-                    }
-                }
-
+        getProject() {
+            axios.get(`http://127.0.0.1:8000/api/portfolio/${this.$route.params.slug}`,
             ).then(res => {
-                console.log('projectSingle:', res.data.wallets.data)
+                console.log('projectSingle:', res.data)
 
-                res.data.wallets.data.forEach(project => {
-                    project.new_image = 'http://127.0.0.1:8000/storage/' + project.new_image;
-                });
-
-
-                this.project = res.data.wallets.data
-               
+                this.project = res.data.wallet
+                this.getImageUrl();
 
             })
+        },
+        getImageUrl() {
+            this.imageUrl = `http://127.0.0.1:8000/storage/${this.project.new_image}`;
+            
         }
     },
     mounted() {
@@ -38,12 +32,12 @@ export default {
 
 <template>
     <div class="container mt-4">
-        <h1>post singolo</h1>
+        <h1>Dettagli Progetto</h1>
     </div>
 
     <div class="container mb-5 d-flex justify-content-center gap-3">
         <div class="card d-flex mt-3 col-5 ">
-            <img class="card-img-top" :src="project?.new_image" alt="Title" height="100%" width="100" />
+            <img class="card-img-top" :src="imageUrl" alt="Title" height="100%" width="100" />
             <div class="card-body">
                 <h4 class="card-title">{{ project.title }}</h4>
                 <p class="card-text">Description: {{ project.description }}</p>
@@ -57,7 +51,7 @@ export default {
                 </p>
             </div>
         </div>
-    </div> 
+    </div>
 </template>
 
 <style scoped></style>

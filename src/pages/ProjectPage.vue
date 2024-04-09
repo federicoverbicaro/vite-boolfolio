@@ -50,7 +50,7 @@ export default {
 
 <template>
     <div class="container mt-4">
-        <h1>qui andranno i post</h1>
+        <h1>Progetti</h1>
     </div>
 
 

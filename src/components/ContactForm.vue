@@ -28,13 +28,13 @@ export default {
 
         this.errors = {};
 
-        axios.post(`${this.store.apiBaseUrl}/api/contacts`, 
-                data
-        ).then(res =>{
+        axios.post(`${this.store.apiBaseUrl}/api/contacts`, data
+  
+        ).then(res => {
 
             this.success = res.data.success;
 
-            if(!this.succes){
+            if(!this.success){
                 this.errors = res.data.errors
             }else{
                 this.name = ''
@@ -69,7 +69,7 @@ export default {
                     placeholder="Nome"
                     v-model="name">
 
-                    <p v-for="(error,index) in errors.name" :key='`${index}`' class="invalid-feedback">
+                    <p v-for="(error,index) in errors?.name" :key='`${index}`' class="invalid-feedback">
                         {{ error }}
                     </p>
                 </div>
@@ -79,7 +79,7 @@ export default {
                     placeholder="Email"
                     v-model="email">
 
-                    <p v-for="(error,index) in errors.email" :key='`${index}`' class="invalid-feedback">
+                    <p v-for="(error,index) in errors?.email" :key='`${index}`' class="invalid-feedback">
                         {{ error }}
                     </p>
                 </div>
@@ -87,7 +87,7 @@ export default {
                 <div class="mt-3">
                     <textarea class="form-control" :class="{'is-invalid ': errors.message}"  name="message" id="message" cols="30" rows="10" v-model="message"></textarea>
 
-                    <p v-for="(error,index) in errors.message" :key='`${index}`' class="invalid-feedback">
+                    <p v-for="(error,index) in errors?.message" :key='`${index}`' class="invalid-feedback">
                         {{ error }}
                     </p>
                 </div>
